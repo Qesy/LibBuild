@@ -1,0 +1,52 @@
+<?php
+namespace Model;
+defined ( 'PATH_SYS' ) || exit ( 'No direct script access allowed' );
+/*
+ * Name 	: {ClassName}
+ * Date 	: {Date}
+ * Author 	: Qesy
+ * QQ 		: 762264
+ * Mail 	: 762264@qq.com
+ * Company	: Shanghai Rong Yi Technology Co., Ltd.
+ * Web		: http://www.sj-web.com.cn/
+ * (̅_̅_̅(̲̅(̅_̅_̅_̅_̅_̅_̅_̅()ڪے
+ *
+ */
+class {ClassName} extends \Db_pdo {
+	const TABLE_NAME = '{Table}';
+	const PRIMARY_KEY = '{PrimaryKey}';
+	{Field}
+	
+	public function GetList($IdArr){
+		$condArr = empty($IdArr) ? array() : array(self::PRIMARY_KEY => $IdArr);
+		return $this->SetTbName(self::TABLE_NAME)->SetCond($condArr)->ExecSelect();
+	}
+	
+	public function GetListByKey($IdArr){
+		$condArr = empty($IdArr) ? array() : array(self::PRIMARY_KEY => $IdArr);
+		return $this->SetTbName(self::TABLE_NAME)->SetCond($condArr)->SetIndex(self::PRIMARY_KEY)->ExecSelect();
+	}
+	
+	public function GetListByPage($Limit, $CondArr, $Sort, &$count){
+	    return $this->SetTbName(self::TABLE_NAME)->SetCond($CondArr)->SetLimit($Limit)->SetSort($Sort)->ExecSelectAll($count);
+	}
+	
+	public function Get(){
+		$rs = $this->SetTbName(self::TABLE_NAME)->SetCond(array(self::PRIMARY_KEY => $this->{PrimaryKey}))->ExecSelectOne();
+		if(empty($rs)) return;
+		{Assignment}}	
+	
+	public function Add(){
+		return $this->SetTbName(self::TABLE_NAME)->SetInsert(array(
+		{AddValue}))->ExecInsert();
+	}
+	
+	public function Edit(){
+		return $this->SetTbName(self::TABLE_NAME)->SetCond(array(self::PRIMARY_KEY => $this->{PrimaryKey}))->SetUpdate(array(
+		{AddValue}))->ExecUpdate();
+	}
+	
+	public function Del(){
+		return $this->SetTbName(self::TABLE_NAME)->SetCond(array(self::PRIMARY_KEY => $this->{PrimaryKey}))->ExecDelete();
+	}
+}
